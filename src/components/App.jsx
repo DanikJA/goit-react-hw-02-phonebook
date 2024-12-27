@@ -23,10 +23,16 @@ export class App extends Component {
     number: '',
   };
 
-  addNumber = () => {};
+  addNumber = newContact => {
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
+    }));
+  };
+
   render() {
     return (
       <div>
+        <p>Contacts</p>
         <Formik
           initialValues={{
             name: '',
@@ -34,7 +40,12 @@ export class App extends Component {
           }}
           validationSchema={numbersSchema}
           onSubmit={(values, actions) => {
-            console.log(values);
+            const newContact = {
+              id: nanoid(),
+              name: values.name,
+              number: values.number,
+            };
+            this.addNumber(newContact);
             actions.resetForm();
           }}
         >
@@ -54,6 +65,15 @@ export class App extends Component {
             <button type="submit">Submit</button>
           </StyledForm>
         </Formik>
+
+        <h2>Contact list</h2>
+        <ul>
+          {this.state.contacts.map(contact => (
+            <li key={contact.id}>
+              {contact.name}: {contact.number}
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
