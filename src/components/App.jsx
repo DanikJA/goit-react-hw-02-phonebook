@@ -1,5 +1,13 @@
 import { Component } from 'react';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, ErrorMessage } from 'formik';
+import { StyledForm, ErrorText } from './App.Styled';
+import * as Yup from 'yup';
+
+const numbersSchema = Yup.object().shape({
+  filter: '',
+  name: Yup.string().min(2, 'Too Short!').required('Required'),
+  number: Yup.string().min(10, 'Mast be 10 or more').required('Required'),
+});
 
 export class App extends Component {
   render() {
@@ -17,23 +25,27 @@ export class App extends Component {
             name: '',
             number: '',
           }}
-          onSubmit={values => {
+          validationSchema={numbersSchema}
+          onSubmit={(values, actions) => {
             console.log(values);
+            actions.resetForm();
           }}
         >
-          <Form>
+          <StyledForm>
             <label>
               Name
               <Field name="name" />
+              <ErrorMessage name="name" component={ErrorText} />
             </label>
 
             <label>
               Number
               <Field name="number" type="number" />
+              <ErrorMessage name="number" component={ErrorText} />
             </label>
 
             <button type="submit">Submit</button>
-          </Form>
+          </StyledForm>
         </Formik>
       </div>
     );
