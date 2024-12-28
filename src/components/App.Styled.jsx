@@ -55,7 +55,7 @@ export const Input = styled.input`
 
 export const ContactListContainer = styled.div`
   margin-top: 40px;
-  max-width: 400px;
+  width: 400px;
   margin: 0 auto;
 `;
 
@@ -120,4 +120,64 @@ export const ContactListHeading = styled.h2`
   text-align: center;
   margin-bottom: 20px;
   letter-spacing: 0.5px;
+`;
+
+export const SearchLabel = styled.label`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+`;
+
+export const SearchInput = styled(Input)`
+  width: 200px;
+  padding: 10px;
+  margin-top: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: #4caf50;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+`;
+
+export const DeleteButton = styled.button`
+  background-color: gray;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  height: 44px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  &:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    background-color: #e74c3c;
+    transform: scale(0.98);
+  }
+`;
+
+export const DivWrapper = styled.div`
+  display: flex;
+  margin-right: auto;
 `;

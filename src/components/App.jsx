@@ -11,6 +11,10 @@ import {
   ContactItem,
   SubmitButton,
   ContactListHeading,
+  SearchLabel,
+  SearchInput,
+  DeleteButton,
+  DivWrapper,
 } from './App.Styled';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
@@ -39,9 +43,11 @@ export class App extends Component {
       ContactInContacts =>
         ContactInContacts.name.toLowerCase() === contact.name.toLowerCase()
     );
+
     const contactWithSameNumber = this.state.contacts.find(
       ContactInContacts => ContactInContacts.number === contact.number
     );
+
     if (contactWithSameName && contactWithSameNumber) {
       Notiflix.Notify.failure(
         `Контакт з ім'ям ${contact.name} та номером ${contact.number} вже існує!`
@@ -111,26 +117,26 @@ export class App extends Component {
           </StyledForm>
         </Formik>
 
-        <label>
+        <SearchLabel>
           Find contacts by name
-          <Input type="text" onChange={this.filterContacts} />
-        </label>
+          <SearchInput type="text" onChange={this.filterContacts} />
+        </SearchLabel>
 
         <ContactListContainer>
           <ContactListHeading>Contacts</ContactListHeading>
           <ContactList>
             {filteredContacts.map(contact => (
-              <div key={contact.id}>
+              <DivWrapper key={contact.id}>
                 <ContactItem>
                   {contact.name}: {contact.number}
                 </ContactItem>
-                <button
+                <DeleteButton
                   type="button"
                   onClick={() => this.handleDelete(contact.id)}
                 >
                   Delete
-                </button>
-              </div>
+                </DeleteButton>
+              </DivWrapper>
             ))}
           </ContactList>
         </ContactListContainer>
