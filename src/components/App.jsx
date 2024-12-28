@@ -62,6 +62,12 @@ export class App extends Component {
     this.setState({ filter: event.target.value });
   };
 
+  handleDelete = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
   render() {
     const { filter, contacts } = this.state;
     const filteredContacts = contacts.filter(
@@ -114,9 +120,17 @@ export class App extends Component {
           <ContactListHeading>Contacts</ContactListHeading>
           <ContactList>
             {filteredContacts.map(contact => (
-              <ContactItem key={contact.id}>
-                {contact.name}: {contact.number}
-              </ContactItem>
+              <div key={contact.id}>
+                <ContactItem>
+                  {contact.name}: {contact.number}
+                </ContactItem>
+                <button
+                  type="button"
+                  onClick={() => this.handleDelete(contact.id)}
+                >
+                  Delete
+                </button>
+              </div>
             ))}
           </ContactList>
         </ContactListContainer>
