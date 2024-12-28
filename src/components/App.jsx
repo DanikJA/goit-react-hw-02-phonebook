@@ -35,16 +35,27 @@ export class App extends Component {
   };
 
   addNumber = contact => {
-    const existingContact = this.state.contacts.find(
+    const contactWithSameName = this.state.contacts.find(
       ContactInContacts =>
-        ContactInContacts.name.toLocaleLowerCase() ===
-        contact.name.toLocaleLowerCase()
+        ContactInContacts.name.toLowerCase() === contact.name.toLowerCase()
     );
-    existingContact
-      ? Notiflix.Notify.failure(`Контакт з ім'ям ${contact.name} вже існує!`)
-      : this.setState(prevState => ({
-          contacts: [...prevState.contacts, contact],
-        }));
+    const contactWithSameNumber = this.state.contacts.find(
+      ContactInContacts => ContactInContacts.number === contact.number
+    );
+    if (contactWithSameName && contactWithSameNumber) {
+      Notiflix.Notify.failure(
+        `Контакт з ім'ям ${contact.name} та номером ${contact.number} вже існує!`
+      );
+    } else if (contactWithSameName) {
+      Notiflix.Notify.failure(`Контакт з ім'ям ${contact.name} вже існує!`);
+    } else if (contactWithSameNumber) {
+      Notiflix.Notify.failure(`Контакт з номером ${contact.number} вже існує!`);
+    } else {
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, contact],
+      }));
+      Notiflix.Notify.success(`Контакт ${contact.name} успішно додано!`);
+    }
   };
 
   filterContacts = event => {
