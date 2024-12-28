@@ -9,6 +9,7 @@ import {
   ContactList,
   ContactItem,
   SubmitButton,
+  ContactListHeading,
 } from './App.Styled';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
@@ -30,17 +31,33 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
   addNumber = contact => {
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
-    }));
+    const existingContact = this.state.contacts.find(
+      ContactInContacts =>
+        ContactInContacts.name.toLocaleLowerCase() ===
+        contact.name.toLocaleLowerCase()
+    );
+    existingContact
+      ? alert(`Контакт з ім'ям ${contact.name} вже існує!`)
+      : this.setState(prevState => ({
+          contacts: [...prevState.contacts, contact],
+        }));
+  };
+
+  filterContacts = event => {
+    this.setState({ filter: event.target.value });
   };
 
   render() {
+    const { filter, contacts } = this.state;
+    const filteredContacts = contacts.filter(
+      contact =>
+        contact.name.toLowerCase().includes(filter.toLowerCase()) ||
+        contact.number.includes(filter)
+    );
+
     return (
       <div>
         <Formik
@@ -76,10 +93,15 @@ export class App extends Component {
           </StyledForm>
         </Formik>
 
+        <label>
+          Find contacts by name
+          <Input type="text" onChange={this.filterContacts} />
+        </label>
+
         <ContactListContainer>
-          <h2>Contact list</h2>
+          <ContactListHeading>Contacts</ContactListHeading>
           <ContactList>
-            {this.state.contacts.map(contact => (
+            {filteredContacts.map(contact => (
               <ContactItem key={contact.id}>
                 {contact.name}: {contact.number}
               </ContactItem>
