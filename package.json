@@ -12,6 +12,7 @@
     "formik": "^2.4.6",
     "multicast-dns": "^7.2.5",
     "nanoid": "^5.0.9",
+    "notiflix": "^3.2.7",
     "postcss": "^8.4.49",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

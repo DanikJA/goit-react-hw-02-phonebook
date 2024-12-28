@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Notiflix from 'notiflix';
 import { Formik, Field, ErrorMessage } from 'formik';
 import {
   StyledForm,
@@ -40,7 +41,7 @@ export class App extends Component {
         contact.name.toLocaleLowerCase()
     );
     existingContact
-      ? alert(`Контакт з ім'ям ${contact.name} вже існує!`)
+      ? Notiflix.Notify.failure(`Контакт з ім'ям ${contact.name} вже існує!`)
       : this.setState(prevState => ({
           contacts: [...prevState.contacts, contact],
         }));
