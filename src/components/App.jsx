@@ -25,7 +25,11 @@ export class App extends Component {
       contact => contact.number === number
     );
 
-    if (contactWithSameName) {
+    if (contactWithSameName && contactWithSameNumber) {
+      Notiflix.Notify.failure(
+        `Контакт з ім'ям ${name} та з номером ${number} вже існує!`
+      );
+    } else if (contactWithSameName) {
       Notiflix.Notify.failure(`Контакт з ім'ям ${name} вже існує!`);
     } else if (contactWithSameNumber) {
       Notiflix.Notify.failure(`Контакт з номером ${number} вже існує!`);
