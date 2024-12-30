@@ -13,8 +13,6 @@ export const DivWrapper = styled.div`
 
 export const DeleteButton = styled.button`
   background-color: #ccc;
-  align-items: center;
-  justify-content: center;
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -23,6 +21,7 @@ export const DeleteButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+
   &:hover {
     background-color: #c0392b;
     transform: scale(1.05);
@@ -40,9 +39,10 @@ export const DeleteButton = styled.button`
 
 export const ContactItem = styled.li`
   display: flex;
-  padding: 5px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 15px;
+  width: 400px;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
