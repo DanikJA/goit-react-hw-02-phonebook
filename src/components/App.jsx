@@ -123,19 +123,19 @@ export class App extends Component {
         </SearchLabel>
 
         <ContactListContainer>
-          <ContactListHeading>Contacts</ContactListHeading>
+          <ContactListHeading>Contacts:</ContactListHeading>
           <ContactList>
             {filteredContacts.map(contact => (
               <DivWrapper key={contact.id}>
                 <ContactItem>
                   {contact.name}: {contact.number}
+                  <DeleteButton
+                    type="button"
+                    onClick={() => this.handleDelete(contact.id)}
+                  >
+                    Delete
+                  </DeleteButton>
                 </ContactItem>
-                <DeleteButton
-                  type="button"
-                  onClick={() => this.handleDelete(contact.id)}
-                >
-                  Delete
-                </DeleteButton>
               </DivWrapper>
             ))}
           </ContactList>

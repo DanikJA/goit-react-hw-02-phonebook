@@ -35,7 +35,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   padding: 8px;
   font-size: 16px;
-  border: 2px solid #ddd;
+  border: 1px solid #ddd;
   border-radius: 6px;
   outline: none;
   width: 100%;
@@ -55,8 +55,6 @@ export const Input = styled.input`
 
 export const ContactListContainer = styled.div`
   margin-top: 40px;
-  width: 400px;
-  margin: 0 auto;
 `;
 
 export const ContactList = styled.ul`
@@ -64,21 +62,30 @@ export const ContactList = styled.ul`
   padding: 0;
 `;
 
+export const DivWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
 export const ContactItem = styled.li`
-  padding: 12px;
+  display: flex;
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
-  margin-bottom: 10px;
+  gap: 12px;
   font-size: 16px;
   color: #333;
-
   &:hover {
     background-color: #f4f4f4;
-  }
-
-  &:last-child {
-    margin-bottom: 0px;
   }
 `;
 
@@ -86,7 +93,7 @@ export const SubmitButton = styled.button`
   width: 100px;
   margin: 0 auto;
   padding: 12px 20px;
-  background-color: #007bff;
+  background-color: #ccc;
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -96,7 +103,7 @@ export const SubmitButton = styled.button`
   transition: background-color 0.3s, transform 0.2s;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: gray;
     transform: scale(1.05);
   }
 
@@ -126,7 +133,6 @@ export const SearchLabel = styled.label`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 20px;
   font-size: 16px;
   font-weight: 500;
   color: #333;
@@ -152,12 +158,13 @@ export const SearchInput = styled(Input)`
 `;
 
 export const DeleteButton = styled.button`
-  background-color: gray;
+  background-color: #ccc;
+  align-items: center;
+  justify-content: center;
   color: white;
   font-size: 16px;
   font-weight: 600;
-  height: 44px;
-  padding: 5px;
+  padding: 8px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -175,9 +182,4 @@ export const DeleteButton = styled.button`
     background-color: #e74c3c;
     transform: scale(0.98);
   }
-`;
-
-export const DivWrapper = styled.div`
-  display: flex;
-  margin-right: auto;
 `;
