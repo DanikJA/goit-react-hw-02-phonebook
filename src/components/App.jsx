@@ -1,31 +1,9 @@
 import { Component } from 'react';
 import Notiflix from 'notiflix';
-import { Formik, Field, ErrorMessage } from 'formik';
-import {
-  StyledForm,
-  ErrorText,
-  Label,
-  Input,
-  ContactListContainer,
-  ContactList,
-  ContactItem,
-  SubmitButton,
-  ContactListHeading,
-  SearchLabel,
-  SearchInput,
-  DeleteButton,
-  DivWrapper,
-} from './App.Styled';
-import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
-
-const numbersSchema = Yup.object().shape({
-  filter: '',
-  name: Yup.string().min(2, 'Too Short!').required('Required'),
-  number: Yup.string()
-    .matches(/^\d+$/, 'Please enter a valid number!')
-    .required('Required'),
-});
+import { ContactForm } from './ContactForm/ContactForm';
+import { Filter } from './Filter/Filter';
+import { ContactList } from './ContactList/ContactList';
 
 export class App extends Component {
   state = {
@@ -38,29 +16,25 @@ export class App extends Component {
     filter: '',
   };
 
-  addNumber = contact => {
+  addNumber = ({ name, number }) => {
     const contactWithSameName = this.state.contacts.find(
-      ContactInContacts =>
-        ContactInContacts.name.toLowerCase() === contact.name.toLowerCase()
+      contact => contact.name.toLowerCase() === name.toLowerCase()
     );
 
     const contactWithSameNumber = this.state.contacts.find(
-      ContactInContacts => ContactInContacts.number === contact.number
+      contact => contact.number === number
     );
 
-    if (contactWithSameName && contactWithSameNumber) {
-      Notiflix.Notify.failure(
-        `Контакт з ім'ям ${contact.name} та номером ${contact.number} вже існує!`
-      );
-    } else if (contactWithSameName) {
-      Notiflix.Notify.failure(`Контакт з ім'ям ${contact.name} вже існує!`);
+    if (contactWithSameName) {
+      Notiflix.Notify.failure(`Contact with name ${name} already exists!`);
     } else if (contactWithSameNumber) {
-      Notiflix.Notify.failure(`Контакт з номером ${contact.number} вже існує!`);
+      Notiflix.Notify.failure(`Contact with number ${number} already exists!`);
     } else {
+      const newContact = { id: nanoid(), name, number };
       this.setState(prevState => ({
-        contacts: [...prevState.contacts, contact],
+        contacts: [...prevState.contacts, newContact],
       }));
-      Notiflix.Notify.success(`Контакт ${contact.name} успішно додано!`);
+      Notiflix.Notify.success(`Contact ${name} added successfully!`);
     }
   };
 
@@ -75,7 +49,7 @@ export class App extends Component {
   };
 
   render() {
-    const { filter, contacts } = this.state;
+    const { contacts, filter } = this.state;
     const filteredContacts = contacts.filter(
       contact =>
         contact.name.toLowerCase().includes(filter.toLowerCase()) ||
@@ -84,62 +58,9 @@ export class App extends Component {
 
     return (
       <div>
-        <Formik
-          initialValues={{
-            name: '',
-            number: '',
-          }}
-          validationSchema={numbersSchema}
-          onSubmit={(values, actions) => {
-            const newContact = {
-              id: nanoid(),
-              name: values.name,
-              number: values.number,
-            };
-            this.addNumber(newContact);
-            actions.resetForm();
-          }}
-        >
-          <StyledForm>
-            <Label>
-              Name
-              <Field name="name" as={Input} />
-              <ErrorMessage name="name" component={ErrorText} />
-            </Label>
-
-            <Label>
-              Number
-              <Field name="number" as={Input} />
-              <ErrorMessage name="number" component={ErrorText} />
-            </Label>
-
-            <SubmitButton type="submit">Submit</SubmitButton>
-          </StyledForm>
-        </Formik>
-
-        <SearchLabel>
-          Find contacts by name
-          <SearchInput type="text" onChange={this.filterContacts} />
-        </SearchLabel>
-
-        <ContactListContainer>
-          <ContactListHeading>Contacts:</ContactListHeading>
-          <ContactList>
-            {filteredContacts.map(contact => (
-              <DivWrapper key={contact.id}>
-                <ContactItem>
-                  {contact.name}: {contact.number}
-                  <DeleteButton
-                    type="button"
-                    onClick={() => this.handleDelete(contact.id)}
-                  >
-                    Delete
-                  </DeleteButton>
-                </ContactItem>
-              </DivWrapper>
-            ))}
-          </ContactList>
-        </ContactListContainer>
+        <ContactForm onSubmit={this.addNumber} />
+        <Filter value={filter} onChange={this.filterContacts} />
+        <ContactList contacts={filteredContacts} onDelete={this.handleDelete} />
       </div>
     );
   }
