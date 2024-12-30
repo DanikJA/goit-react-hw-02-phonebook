@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
-import { ContactList } from './ContactList/ContactList';
+import { ContactListComponent } from './ContactList/ContactList';
 
 export class App extends Component {
   state = {
@@ -60,7 +60,10 @@ export class App extends Component {
       <div>
         <ContactForm onSubmit={this.addNumber} />
         <Filter value={filter} onChange={this.filterContacts} />
-        <ContactList contacts={filteredContacts} onDelete={this.handleDelete} />
+        <ContactListComponent
+          contacts={filteredContacts}
+          onDelete={this.handleDelete}
+        />
       </div>
     );
   }

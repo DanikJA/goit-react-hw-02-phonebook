@@ -1,4 +1,4 @@
-import { SearchLabel, SearchInput } from '../App.Styled';
+import { SearchLabel, SearchInput } from './Filter.Styled';
 
 export const Filter = ({ value, onChange }) => (
   <SearchLabel>
