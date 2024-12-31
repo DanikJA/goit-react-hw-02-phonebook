@@ -45,10 +45,11 @@ export const ContactItem = styled.li`
   width: 400px;
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 10px;
   gap: 12px;
   font-size: 16px;
   color: #333;
+
   &:hover {
     background-color: #f4f4f4;
   }

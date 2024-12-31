@@ -1,4 +1,4 @@
-import { ContactItem } from '../ContactItem/Contact.styled';
+import { ContactItem } from '../ContactItem/Contact.item';
 import {
   ContactListContainer,
   ContactListHeading,
