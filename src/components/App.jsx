@@ -61,7 +61,7 @@ export class App extends Component {
     );
 
     return (
-      <div>
+      <div style={{ marginBottom: '50px' }}>
         <ContactForm onSubmit={this.addNumber} />
         <Filter value={filter} onChange={this.filterContacts} />
         <ContactListComponent

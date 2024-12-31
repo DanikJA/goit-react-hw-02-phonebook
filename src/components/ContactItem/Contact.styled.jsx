@@ -40,13 +40,11 @@ export const DeleteButton = styled.button`
 export const ContactItem = styled.li`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 15px;
-  width: 400px;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
-  gap: 12px;
+  gap: 15px;
   font-size: 16px;
   color: #333;
 
