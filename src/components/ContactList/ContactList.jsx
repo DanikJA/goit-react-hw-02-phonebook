@@ -1,9 +1,9 @@
-import { ContactItem } from '../ContactItem/Contact.item';
+import { ContactItem } from '../ContactItem/ContactItem';
 import {
   ContactListContainer,
   ContactListHeading,
   ContactList,
-} from './ContactList.styled.jsx';
+} from './ContactListStyled.jsx';
 
 export const ContactListComponent = ({ contacts, onDelete }) => (
   <ContactListContainer>

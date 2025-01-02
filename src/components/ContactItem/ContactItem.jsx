@@ -2,7 +2,7 @@ import {
   DivWrapper,
   DeleteButton,
   ContactItem as StyledContactItem,
-} from './Contact.styled';
+} from './ContactStyled';
 
 export const ContactItem = ({ id, name, number, onDelete }) => (
   <DivWrapper>

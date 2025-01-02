@@ -5,7 +5,7 @@ import {
   Input,
   SubmitButton,
   ErrorText,
-} from './ContactForm.Styled.jsx';
+} from './ContactFormStyled.jsx';
 import * as Yup from 'yup';
 
 const numbersSchema = Yup.object().shape({
